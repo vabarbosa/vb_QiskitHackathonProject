@@ -196,3 +196,14 @@ all. This was a common theme among quantum computing papers that used
 Grover's, just not explaining how they actually set up that Grover's
 search. We intend to email the authors of the paper to ask how they
 would change the diffuser to fix this issue.
+
+## Team members
+
+John Hoffman
+Alex Walburg
+Jack Dickson
+Aathreya Kadambi
+
+## Team name
+
+Phase kickback
