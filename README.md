@@ -112,8 +112,8 @@ pair.
 
 Afterwards, we simply run grovers with the following oracle
 
-U_w|00000> = -|00000>
-U_w = I otherwise
+$U_w|00000\rangle = -|00000\rangle$
+$U_w = I$ otherwise
 
 Where the ket we act on is the patterns. This effectively makes the
 oracle function compare when the two terms are equal, enabling us to
@@ -165,7 +165,7 @@ p_reg_0: ───────────────░─┤ X ├──┼�
 p_reg_1: ───────────────░──────┤ X ├─░─┤1              ├─░─┤1       ├─░─
                         ░      └───┘ ░ └───────────────┘ ░ └────────┘ ░ 
 ```
-### Phase oracle(for p = 4)
+### Phase oracle(for $p = 4$)
 ```
 q_0: ────■─────────
          │         
