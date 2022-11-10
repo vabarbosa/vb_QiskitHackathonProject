@@ -1,6 +1,8 @@
 Welcome to our project solving the pattern matching problem using Qubits.
 
 
+Video: https://media.discordapp.net/attachments/1037197594230792205/1040133077785116702/video1906538462.mp4
+
 For this, we utilized the following paper, which details how to use
 grovers to find the problem in O(sqrt(n)) time:
 https://www.nature.com/articles/s41534-021-00369-3
