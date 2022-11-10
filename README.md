@@ -112,8 +112,7 @@ pair.
 
 Afterwards, we simply run grovers with the following oracle
 
-$U_w|00000\rangle = -|00000\rangle$
-$U_w = I$ otherwise
+$U_w|00000\rangle = -|00000\rangle$ and $U_w = I$ otherwise
 
 Where the ket we act on is the patterns. This effectively makes the
 oracle function compare when the two terms are equal, enabling us to
