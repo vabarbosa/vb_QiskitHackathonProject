@@ -4,7 +4,7 @@ Welcome to our project solving the pattern matching problem using Qubits.
 Video: https://drive.google.com/file/d/1NrQwLvASjidugiCMgVSqo2pdSzLIZZIh/view?usp=sharing
 
 For this, we utilized the following paper, which details how to use
-grovers to find the problem in $O(\sqrt(n))$ time:
+grovers to find the problem in $O(\sqrt{n})$ time:
 https://www.nature.com/articles/s41534-021-00369-3
 
 The paper specifies that the size of the string is $N$, and the pattern
