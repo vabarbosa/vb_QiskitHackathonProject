@@ -7,7 +7,6 @@ https://www.nature.com/articles/s41534-021-00369-3
 
 The paper specifies that the size of the string is N, and the pattern
 has size M.
->>>>>>> 9f620dd (Added in the shifting section)
 
 The main steps of the algorithm are summarized in the following 4 lines
 
@@ -15,6 +14,8 @@ The main steps of the algorithm are summarized in the following 4 lines
 2. Shift the register
 3. XOR the registers
 4. Diffuse the result (Grovers)
+
+Additionally, to make the number of grovers steps constant, we assume that there is only one solution.
 
 ## Creating the Registers       
 
@@ -94,6 +95,20 @@ q_3: ─X───────
 
 This is then controlled by an arbitrary kbit to complete the random shifting.
 
+## Computing the xors
+
+Our oracle for this problem needs to figure out if the first M bits of
+T are equal to P, which reduces to checking of the xor of those bits
+is zero. We implement this using a set of cnot gates between each bit
+pair.
 
 ## Emailing the Authors
-Reading the paper was a passable solution to generating an algorithm for our problem. Because of what we think is Phase Kickback, our answer is the opposite of what the paper claims to be true. The reason for this problem is mostly because of the way they explain running Grover's Algorithm, in that they don't not explain the specifics at all. This was a common theme among quantum computing papers that used Grover's, just not explaining how they actually set up that Grover's search. We intend to email the authors of the paper to ask how they would change the diffuser to fix this issue. 
+Reading the paper was a passable solution to generating an algorithm
+for our problem. Because of what we think is Phase Kickback, our
+answer is the opposite of what the paper claims to be true. The reason
+for this problem is mostly because of the way they explain running
+Grover's Algorithm, in that they don't not explain the specifics at
+all. This was a common theme among quantum computing papers that used
+Grover's, just not explaining how they actually set up that Grover's
+search. We intend to email the authors of the paper to ask how they
+would change the diffuser to fix this issue.
