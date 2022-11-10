@@ -102,6 +102,19 @@ T are equal to P, which reduces to checking of the xor of those bits
 is zero. We implement this using a set of cnot gates between each bit
 pair.
 
+## Diffuse the result
+
+Afterwards, we simply run grovers with the following oracle
+
+U_w|00000> = -|00000>
+U_w = I otherwise
+
+Where the ket we act on is the patterns. This effectively makes the
+oracle function compare when the two terms are equal, enabling us to
+run grovers. An important thing to remember for this problem is that
+diffusion must also be applied to the kbits, as otherwise they have a
+tendancy to lose their entanglement. 
+
 ## Emailing the Authors
 Reading the paper was a passable solution to generating an algorithm
 for our problem. Because of what we think is Phase Kickback, our
