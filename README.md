@@ -17,6 +17,10 @@ The main steps of the algorithm are summarized in the following 4 lines
 
 Additionally, to make the number of grovers steps constant, we assume that there is only one solution.
 
+## Running the program
+Install qiskit with "pip install qiskit" and then run the jupyter
+notebook. T is the string and P is the pattern.
+
 ## Creating the Registers       
 
 For our pattern matching, we first need to initialize what pattern we want to match and what text we want to match that pattern to. In the search for a simple solution set due to the amount of time for the project, our group decided to think of these as qubit strings using the qiskit QuantumRegister function. The function allows us to create a register of an integer amount of qubits.
@@ -114,6 +118,73 @@ oracle function compare when the two terms are equal, enabling us to
 run grovers. An important thing to remember for this problem is that
 diffusion must also be applied to the kbits, as otherwise they have a
 tendancy to lose their entanglement. 
+
+## Circuit Diagrams
+### Full Diagram
+```
+            ┌────────────┐ ░ ┌──────────────────┐ ░ ┌─┐   
+   k_reg_0: ┤0           ├─░─┤0                 ├─░─┤M├───
+            │  Hadamards │ ░ │                  │ ░ └╥┘┌─┐
+   k_reg_1: ┤1           ├─░─┤1                 ├─░──╫─┤M├
+            ├───────────┬┘ ░ │                  │ ░  ║ └╥┘
+   t_reg_0: ┤0          ├──░─┤2                 ├─░──╫──╫─
+            │           │  ░ │                  │ ░  ║  ║ 
+   t_reg_1: ┤1          ├──░─┤3                 ├─░──╫──╫─
+            │  Encoding │  ░ │  Grovers 2 times │ ░  ║  ║ 
+   t_reg_2: ┤2          ├──░─┤4                 ├─░──╫──╫─
+            │           │  ░ │                  │ ░  ║  ║ 
+   t_reg_3: ┤3          ├──░─┤5                 ├─░──╫──╫─
+            ├───────────┤  ░ │                  │ ░  ║  ║ 
+   p_reg_0: ┤0          ├──░─┤6                 ├─░──╫──╫─
+            │  Encoding │  ░ │                  │ ░  ║  ║ 
+   p_reg_1: ┤1          ├──░─┤7                 ├─░──╫──╫─
+            └───────────┘  ░ └──────────────────┘ ░  ║  ║ 
+idx_cout_0: ═════════════════════════════════════════╩══╬═
+                                                        ║ 
+idx_cout_1: ════════════════════════════════════════════╩═
+```
+### Grovers 2 times
+```
+         ┌────────────┐ ░            ░                   ░ ┌────────┐ ░ 
+k_reg_0: ┤0           ├─░────────────░───────────────────░─┤2       ├─░─
+         │            │ ░            ░                   ░ │        │ ░ 
+k_reg_1: ┤1           ├─░────────────░───────────────────░─┤3       ├─░─
+         │            │ ░            ░                   ░ │        │ ░ 
+t_reg_0: ┤2           ├─░───■────────░───────────────────░─┤        ├─░─
+         │  S_k shift │ ░   │        ░                   ░ │        │ ░ 
+t_reg_1: ┤3           ├─░───┼────■───░───────────────────░─┤        ├─░─
+         │            │ ░   │    │   ░                   ░ │  U$_s$ │ ░ 
+t_reg_2: ┤4           ├─░───┼────┼───░───────────────────░─┤        ├─░─
+         │            │ ░   │    │   ░                   ░ │        │ ░ 
+t_reg_3: ┤5           ├─░───┼────┼───░───────────────────░─┤        ├─░─
+         └────────────┘ ░ ┌─┴─┐  │   ░ ┌───────────────┐ ░ │        │ ░ 
+p_reg_0: ───────────────░─┤ X ├──┼───░─┤0              ├─░─┤0       ├─░─
+                        ░ └───┘┌─┴─┐ ░ │  Phase Oracle │ ░ │        │ ░ 
+p_reg_1: ───────────────░──────┤ X ├─░─┤1              ├─░─┤1       ├─░─
+                        ░      └───┘ ░ └───────────────┘ ░ └────────┘ ░ 
+```
+### Phase oracle(for p = 4)
+```
+q_0: ────■─────────
+         │         
+q_1: ─■──o─────────
+      │  │         
+q_2: ─o──o───────■─
+      │  │ ┌───┐ │ 
+q_3: ─o──o─┤ Z ├─o─
+```
+
+## Difficulties
+
+While implementing the algorithm, our group ran into a small issue
+which simply do not have the time to solve: Our grovers algorithm is
+broken so that the right answer always has the *least* amplification
+instead of the largest. We're not sure exactly why this is
+happening(though we suspect phase kickback in our oracle or diffuser),
+so we have just chosen to ignore it for now as the runtime is
+technically identical for both algorithms(while keeping track of your
+counts, it's equally easy to look at the minimum as opposed to the
+maximum).
 
 ## Emailing the Authors
 Reading the paper was a passable solution to generating an algorithm
