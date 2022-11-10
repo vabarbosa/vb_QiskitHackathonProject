@@ -4,11 +4,11 @@ Welcome to our project solving the pattern matching problem using Qubits.
 Video: https://drive.google.com/file/d/1NrQwLvASjidugiCMgVSqo2pdSzLIZZIh/view?usp=sharing
 
 For this, we utilized the following paper, which details how to use
-grovers to find the problem in O(sqrt(n)) time:
+grovers to find the problem in $O(\sqrt(n))$ time:
 https://www.nature.com/articles/s41534-021-00369-3
 
-The paper specifies that the size of the string is N, and the pattern
-has size M.
+The paper specifies that the size of the string is $N$, and the pattern
+has size $M$.
 
 The main steps of the algorithm are summarized in the following 4 lines
 
@@ -21,13 +21,13 @@ Additionally, to make the number of grovers steps constant, we assume that there
 
 ## Running the program
 Install qiskit with "pip install qiskit" and then run the jupyter
-notebook. T is the string and P is the pattern.
+notebook. $T$ is the string and $P$ is the pattern.
 
 ## Creating the Registers       
 
 For our pattern matching, we first need to initialize what pattern we want to match and what text we want to match that pattern to. In the search for a simple solution set due to the amount of time for the project, our group decided to think of these as qubit strings using the qiskit QuantumRegister function. The function allows us to create a register of an integer amount of qubits.
 
-In the project we initialize three quantum registers, a register T for our text of length N, a register P for our pattern of length M, and a register K for our index which spans the solution space. There are some initial conditions that must pass for our solution to be valid, firstly the length of T must be more than the length of P, meaning N>M. The next initial condition that must be met is our N and M must be powers of 2.
+In the project we initialize three quantum registers, a register $T$ for our text of length $N$, a register $P$ for our pattern of length $M$, and a register $K$ for our index which spans the solution space. There are some initial conditions that must pass for our solution to be valid, firstly the length of $T$ must be more than the length of $P$, meaning $N>M$. The next initial condition that must be met is our $N$ and $M$ must be powers of 2.
 
 To implement these in our algorithm can be done with just the three lines of python
 ```python
@@ -36,18 +36,18 @@ To implement these in our algorithm can be done with just the three lines of pyt
     k_regs = QuantumRegister(n, name = "k_reg")
 ```
 
-Given two strings, a text string T which we are searching through, and a pattern string P
+Given two strings, a text string $T$ which we are searching through, and a pattern string $P$
 
 
 ## Shifting the register
-Shifting the registers is done to move the size M "window" that we
+Shifting the registers is done to move the size $M$ "window" that we
 look at in our string. This is done to tie our index bits to an actual
 bitsequence in string. While doing this is relavitvely simple in
 classical mechanics, doing so in quantum mechanics requires us to
 implement a left shift using swap gates. 
 
 In order to minimize the number of gates, the paper details the
-following algorithm to implement a left shift in O(log(n)):
+following algorithm to implement a left shift in $O(\log n)$:
 
 1. Choose half the qubits, swap them to their desired location
 2. Recurse on the other half
@@ -103,8 +103,8 @@ This is then controlled by an arbitrary kbit to complete the random shifting.
 
 ## Computing the xors
 
-Our oracle for this problem needs to figure out if the first M bits of
-T are equal to P, which reduces to checking of the xor of those bits
+Our oracle for this problem needs to figure out if the first $M$ bits of
+$T$ are equal to $P$, which reduces to checking of the xor of those bits
 is zero. We implement this using a set of cnot gates between each bit
 pair.
 
